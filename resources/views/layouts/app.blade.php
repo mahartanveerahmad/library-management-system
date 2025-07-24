@@ -9,6 +9,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"> <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }} "> <!-- Custom stlylesheet -->
+
+    <style>
+        .logo-heading{
+            margin-top:16px;
+           color: #800080;
+           font-size: 44px;
+           font-weight:bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,14 +27,15 @@
             <div class="row">
                 <div class="offset-md-4 col-md-4">
                     <div class="logo">
-                        <a href="#"><img src="{{ asset('images/library.png') }}"></a>
+                        <!-- <a href="#"><img src="{{ asset('images/library.png') }}"></a> -->
+                         <h2 class="logo-heading" >KIMS-LIBRARY</h2>
                     </div>
                 </div>
                 <div class="offset-md-2 col-md-2">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hi {{ auth()->user()->name }}
+                            Hi Welcome {{ auth()->user()->name }}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="{{ route('change_password') }}">Change Password</a>
@@ -67,7 +77,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <span>© Copyright {{ now()->format("Y") }} <a href="https://www.yahoobaba.net">YahooBaba 😎</a></span>
+                    <span>© Copyright {{ now()->format("Y") }} <a href="">Ali Raza  😎</a></span>
                 </div>
             </div>
         </div>

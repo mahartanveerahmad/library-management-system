@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <h2 class="admin-heading">Dashboard</h2>
+                    <h2 class="admin-heading">KIMS-LIBRARY</h2>
                 </div>
             </div>
             <div class="row">
