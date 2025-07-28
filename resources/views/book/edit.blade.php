@@ -23,6 +23,41 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label>Volume</label>
+                            <input type="text" class="form-control @error('volume') isinvalid @enderror" name="volume" value="{{ $book->volume }}">
+                            @error('volume')
+                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Issue</label>
+                            <input type="text" class="form-control @error('issue') isinvalid @enderror" name="issue" value="{{ $book->issue }}">
+                            @error('issue')
+                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Total Books</label>
+                            <input type="number" class="form-control @error('total_books') isinvalid @enderror" name="total_books" value="{{ $book->total_books }}">
+                            @error('total_books')
+                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Donated By</label>
+                            <input type="text" class="form-control @error('donated_by') isinvalid @enderror" name="donated_by" value="{{ $book->donated_by }}">
+                            @error('donated_by')
+                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Edition of Book</label>
+                            <input type="text" class="form-control @error('edition_of_book') isinvalid @enderror" name="edition_of_book" value="{{ $book->edition_of_book }}">
+                            @error('edition_of_book')
+                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label>Category</label>
                             <select class="form-control @error('category_id') isinvalid @enderror " name="category_id"
                                 >

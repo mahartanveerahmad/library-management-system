@@ -28,6 +28,11 @@ class StorebookRequest extends FormRequest
             'category_id' => 'required',
             'auther_id' => 'required',
             'publisher_id' => 'required',
+            'volume' => 'nullable|string',
+            'issue' => 'nullable|string',
+            'total_books' => 'nullable|integer',
+            'donated_by' => 'nullable|string',
+            'edition_of_book' => 'nullable|string',
         ];
     }
 }

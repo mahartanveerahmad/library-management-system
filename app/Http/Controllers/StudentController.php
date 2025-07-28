@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\student;
+use App\Models\Student;
 use App\Http\Requests\StorestudentRequest;
 use App\Http\Requests\UpdatestudentRequest;
+
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
 {
@@ -16,7 +19,7 @@ class StudentController extends Controller
     public function index()
     {
         return view('student.index', [
-            'students' => student::Paginate(5)
+            'students' => Student::paginate(5)
         ]);
     }
 
@@ -38,8 +41,7 @@ class StudentController extends Controller
      */
     public function store(StorestudentRequest $request)
     {
-        student::create($request->validated());
-
+        Student::create($request->validated());
         return redirect()->route('students');
     }
 
@@ -51,7 +53,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $student = student::find($id)->first();
+        $student = Student::findOrFail($id);
         return $student;
     }
 
@@ -74,19 +76,25 @@ class StudentController extends Controller
      * @param  \App\Http\Requests\UpdatestudentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatestudentRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $student = student::find($id);
-        $student->name = $request->name;
-        $student->address = $request->address;
-        $student->gender = $request->gender;
-        $student->class = $request->class;
-        $student->age = $request->age;
-        $student->phone = $request->phone;
-        $student->email = $request->email;
-        $student->save();
-
-        return redirect()->route('students');
+        $student = Student::findOrFail($id);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string',
+            'gender' => 'required|in:male,female',
+            'semester' => 'required|string|max:100',
+            'department' => 'required|string|max:255',
+            'student_session' => [
+                'required',
+                Rule::unique('students')->ignore($student->id),
+            ],
+            'age' => 'required|integer|min:1',
+            'phone' => 'required|string|max:15',
+            'email' => 'required|email',
+        ]);
+        $student->update($request->all());
+        return redirect()->route('students')->with('success', 'Student updated successfully!');
     }
 
     /**
@@ -97,7 +105,7 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        student::find($id)->delete();
+        Student::findOrFail($id)->delete();
         return redirect()->route('students');
     }
 }

@@ -21,7 +21,9 @@ class CreateStudentsTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('address');
-            $table->string('class');
+            $table->string('semester');
+            $table->string('department')->nullable();
+            $table->string('student_session')->unique();
             $table->timestamps();
         });
     }

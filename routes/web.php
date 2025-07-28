@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
 
     // books CRUD
     Route::get('/books', [BookController::class, 'index'])->name('books');
+    Route::get('/books/ajax-search', [BookController::class, 'ajaxSearch'])->name('books.ajax-search');
     Route::get('/book/create', [BookController::class, 'create'])->name('book.create');
     Route::get('/book/edit/{book}', [BookController::class, 'edit'])->name('book.edit');
     Route::post('/book/update/{id}', [BookController::class, 'update'])->name('book.update');
@@ -76,7 +77,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/students', [StudentController::class, 'index'])->name('students');
     Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
     Route::get('/student/edit/{student}', [StudentController::class, 'edit'])->name('student.edit');
-    Route::post('/student/update/{id}', [StudentController::class, 'update'])->name('student.update');
+    // Route::post('/student/update/{id}', [StudentController::class, 'update'])->name('student.update');
+    Route::put('/student/update/{id}', [StudentController::class, 'update'])->name('student.update');
     Route::post('/student/delete/{id}', [StudentController::class, 'destroy'])->name('student.destroy');
     Route::post('/student/create', [StudentController::class, 'store'])->name('student.store');
     Route::get('/student/show/{id}', [StudentController::class, 'show'])->name('student.show');

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\book;
@@ -19,8 +18,21 @@ class BookController extends Controller
     public function index()
     {
 
+        $query = request('search');
+        $books = book::query()
+            ->when($query, function ($q) use ($query) {
+                $q->where('name', 'like', "%$query%")
+                  ->orWhere('volume', 'like', "%$query%")
+                  ->orWhere('issue', 'like', "%$query%")
+                  ->orWhere('donated_by', 'like', "%$query%")
+                  ->orWhere('edition_of_book', 'like', "%$query%")
+                  ->orWhere('total_books', 'like', "%$query%")
+                  ;
+            })
+            ->with(['category', 'auther', 'publisher'])
+            ->paginate(5);
         return view('book.index', [
-            'books' => book::Paginate(5)
+            'books' => $books
         ]);
     }
 
@@ -47,7 +59,12 @@ class BookController extends Controller
     public function store(StorebookRequest $request)
     {
         book::create($request->validated() + [
-            'status' => 'Y'
+            'status' => 'Y',
+            'volume' => $request->volume,
+            'issue' => $request->issue,
+            'total_books' => $request->total_books,
+            'donated_by' => $request->donated_by,
+            'edition_of_book' => $request->edition_of_book,
         ]);
         return redirect()->route('books');
     }
@@ -83,6 +100,11 @@ class BookController extends Controller
         $book->auther_id = $request->author_id;
         $book->category_id = $request->category_id;
         $book->publisher_id = $request->publisher_id;
+        $book->volume = $request->volume;
+        $book->issue = $request->issue;
+        $book->total_books = $request->total_books;
+        $book->donated_by = $request->donated_by;
+        $book->edition_of_book = $request->edition_of_book;
         $book->save();
         return redirect()->route('books');
     }

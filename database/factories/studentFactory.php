@@ -21,7 +21,9 @@ class studentFactory extends Factory
             'email' => $this->faker->safeEmail,
             'phone' => $this->faker->phoneNumber,
             'address' => $this->faker->address,
-            'class' => $this->faker->sentence(3)
+            'semester' => $this->faker->sentence(3),
+            'department' => $this->faker->randomElement(['Computer Science', 'Physics', 'Math', 'Business']),
+            'student_session' => $this->faker->year . '-' . ($this->faker->year + 4),
         ];
     }
 }
